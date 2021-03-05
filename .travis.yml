@@ -2,13 +2,15 @@ language: ruby
 cache:
   bundler: true
   yarn: true
+  directories:
+    - node_modules
 services:
   - redis-server
 sudo: required
 before_install:
   - sudo apt-get update
   - sudo apt-get install google-chrome-stable
-  - nvm install --lts
+  - nvm install 12
 addons:
   postgresql: '9.6'
 before_script:
@@ -19,3 +21,5 @@ script:
   - SECRET_KEY_BASE=a RAILS_ENV=production bundle exec rake assets:precompile
   - bundle exec rake test
   - bundle exec rake test:system
+
+
